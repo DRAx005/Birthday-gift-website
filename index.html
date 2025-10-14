@@ -1,122 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday, My Love!</title>
-    <style>
-        /* Basic styling for the page */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fff0f5; /* Light pink for a festive background */
-            color: #333;
-            text-align: center;
-            padding: 50px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden; /* To handle animations properly */
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Do You Love Me? - Happy Birthday!</title>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #ffe6f0, #fff0f5);
+        color: #333;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+        position: relative;
+    }
 
-        h1 {
-            color: #ff4500; /* OrangeRed for a birthday pop */
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
+    h1 {
+        color: #ff4081;
+        font-size: 2.8em;
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px #ffb6c1;
+    }
 
-        p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-        }
+    p {
+        font-size: 1.2em;
+        margin-bottom: 30px;
+    }
 
-        /* Styling for the clickable cake */
-        #cake {
-            font-size: 5em; /* Make the cake emoji large */
-            cursor: pointer; /* Indicate it's clickable */
-            transition: transform 0.3s; /* Smooth scale effect on hover */
-            margin-bottom: 20px;
-        }
+    .question-section h2 {
+        font-size: 2em;
+        margin-bottom: 30px;
+    }
 
-        #cake:hover {
-            transform: scale(1.1); /* Slightly enlarge on hover for interactivity */
-        }
+    .option-button {
+        background-color: #ff4081;
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        font-size: 1.1em;
+        cursor: pointer;
+        border-radius: 30px;
+        margin: 10px;
+        transition: transform 0.2s, background-color 0.3s;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
 
-        .hidden-message {
-            display: none; /* Hidden by default */
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #fff;
-            border: 2px dashed #ff4500; /* Dashed border for a fun, gift-like feel */
-            border-radius: 10px;
-            font-size: 1.1em;
-            animation: fadeIn 1s; /* Animation for reveal */
-        }
+    .option-button:hover {
+        background-color: #ff80ab;
+        transform: scale(1.1);
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+    #transition-message {
+        display: none;
+        font-size: 1.5em;
+        color: #ff1493;
+        margin-bottom: 30px;
+        animation: fadeIn 2s;
+    }
 
-        /* Balloon animation for flying from the side */
-        .balloon {
-            position: absolute;
-            top: 50%; /* Start from the middle vertically */
-            font-size: 24px;
-            color: #ff4500; /* OrangeRed to match theme */
-            animation: flyAcross 3s linear; /* Fly across the screen */
-        }
+    .decorations {
+        font-size: 2em;
+        margin-bottom: 20px;
+        animation: bounce 2s infinite;
+    }
 
-        @keyframes flyAcross {
-            from {
-                transform: translateX(-100vw); /* Start from the left outside the screen */
-                opacity: 1;
-            }
-            to {
-                transform: translateX(100vw); /* End at the right outside the screen */
-                opacity: 0; /* Fade out at the end */
-            }
-        }
-    </style>
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    #cake {
+        font-size: 5em;
+        cursor: pointer;
+        transition: transform 0.3s;
+        margin-bottom: 20px;
+    }
+
+    #cake:hover {
+        transform: scale(1.1);
+    }
+
+    .hidden-message {
+        display: none;
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #fff;
+        border: 2px dashed #ff69b4;
+        border-radius: 10px;
+        font-size: 1.1em;
+        animation: fadeIn 2s;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* Floating Balloons */
+    .balloon {
+        position: absolute;
+        bottom: -50px;
+        font-size: 24px;
+        animation: floatUp linear forwards;
+    }
+
+    @keyframes floatUp {
+        from { transform: translateY(0); opacity: 1; }
+        to { transform: translateY(-110vh); opacity: 0; }
+    }
+
+    /* Floating Hearts */
+    .heart {
+        position: absolute;
+        bottom: 0;
+        color: #ff1493;
+        font-size: 20px;
+        animation: floatHeart 5s linear forwards;
+    }
+
+    @keyframes floatHeart {
+        from { transform: translateY(0) scale(1); opacity: 1; }
+        to { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+    }
+
+    .birthday-section {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sparkle {
+        position: absolute;
+        color: gold;
+        font-size: 18px;
+        animation: sparkle 1s ease-out forwards;
+    }
+
+    @keyframes sparkle {
+        from { transform: scale(0); opacity: 1; }
+        to { transform: scale(2); opacity: 0; }
+    }
+</style>
 </head>
 <body>
+
+<!-- Question Section -->
+<div class="question-section">
+    <h2>Do you love me? 😘</h2>
+    <button class="option-button" onclick="handleAnswer('yes')">Yes</button>
+    <button class="option-button" onclick="handleAnswer('absolute')">Absolute yes ❤️</button>
+</div>
+
+<!-- Transition Message -->
+<div id="transition-message">Aww, I knew it! 💖 Let's make your birthday magical 🎂✨</div>
+
+<!-- Birthday Section -->
+<div class="birthday-section">
     <h1>Happy Birthday, My Love! 🎉</h1>
-    <p>Hey, Megha Gupta, I have created this special page just for your birthday. Do not Click the cake below!</p>
-    
-    <div id="cake">🎂</div>  <!-- Clickable cake element -->
-    
+    <div class="decorations">🎉 Let's make this day shine brighter than ever! 🎈🎂</div>
+    <p>Hey, Megha Gupta, Slap the cake for your small Suprise! 💕</p>
+    <div id="cake">🎂</div>
     <div id="message" class="hidden-message">
-        <p>Happy Birthday, Megha Gupta! I hope this year is filled with all the joy, love, and adventures you deserve. You're the best thing that's ever happened to me, and I'm so grateful for you. Let's make this birthday unforgettable! 🎂❤️</p>
-        <p>With all my love, Nijum Dutta Your BCA boyfriend :P with a website! </p>
+        <p>Happy Birthday, Megha Gupta! You make my life brighter every single day.  
+        Thank you for being my happiness. Here is a small gift from my end and Wishing you endless smiles, love, and laughter! 🎂❤️</p>
+        <p>With all my love, <b>Nijum Dutta</b> — your BCA boyfriend 💻💖</p>
     </div>
-    
-    <script>
-        // JavaScript for interactivity
-        document.getElementById('cake').addEventListener('click', function() {
-            var messageDiv = document.getElementById('message');
-            messageDiv.style.display = 'block';  // Show the hidden message
-            
-            // Add balloon animations for a festive touch
-            for (let i = 0; i < 10; i++) {  // Create 10 balloons
-                createBalloon();
-            }
+</div>
+
+<audio id="bg-music" src="https://cdn.pixabay.com/download/audio/2022/03/16/audio_0d73126ce1.mp3?filename=romantic-piano-loop-112191.mp3" preload="auto"></audio>
+
+<script>
+    let balloonsActive = 0;
+
+    function handleAnswer(choice) {
+        document.querySelector('.question-section').style.display = 'none';
+        document.getElementById('transition-message').style.display = 'block';
+
+        // Show transition message briefly, then birthday section
+        setTimeout(() => {
+            document.getElementById('transition-message').style.display = 'none';
+            document.querySelector('.birthday-section').style.display = 'flex';
+            for (let i = 0; i < 10; i++) createBalloon();
+        }, 2500);
+    }
+
+    document.getElementById('cake').addEventListener('click', function() {
+        const messageDiv = document.getElementById('message');
+        messageDiv.style.display = 'block';
+        playMusic();
+        for (let i = 0; i < 10; i++) createBalloon();
+        for (let i = 0; i < 10; i++) createHeart();
+        for (let i = 0; i < 5; i++) sparkle();
+    });
+
+    function createBalloon() {
+        if (balloonsActive > 40) return;
+        balloonsActive++;
+
+        const colors = ['#ff4081', '#ffeb3b', '#42a5f5', '#81c784', '#ff7043'];
+        const balloon = document.createElement('div');
+        balloon.innerHTML = '🎈';
+        balloon.className = 'balloon';
+        balloon.style.left = Math.random() * 100 + 'vw';
+        balloon.style.fontSize = 20 + Math.random() * 20 + 'px';
+        balloon.style.color = colors[Math.floor(Math.random() * colors.length)];
+        balloon.style.animationDuration = 3 + Math.random() * 3 + 's';
+        document.body.appendChild(balloon);
+
+        setTimeout(() => { balloon.remove(); balloonsActive--; }, 6000);
+    }
+
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerHTML = '💖';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.fontSize = 15 + Math.random() * 25 + 'px';
+        heart.style.animationDuration = 3 + Math.random() * 4 + 's';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+    }
+
+    function sparkle() {
+        const spark = document.createElement('div');
+        spark.className = 'sparkle';
+        spark.innerHTML = '✨';
+        spark.style.left = 45 + Math.random() * 10 + '%';
+        spark.style.top = 60 + Math.random() * 5 + '%';
+        document.body.appendChild(spark);
+        setTimeout(() => spark.remove(), 1000);
+    }
+
+    function playMusic() {
+        const music = document.getElementById('bg-music');
+        music.play().catch(() => {
+            // autoplay blocked, can be triggered by user
         });
-        
-        function createBalloon() {
-            const balloon = document.createElement('div');
-            balloon.innerHTML = '🎈';
-            balloon.className = 'balloon';
-            balloon.style.top = Math.random() * 100 + 'vh';  // Random vertical position
-            balloon.style.animationDuration = Math.random() * 2 + 2 + 's';  // Random speed
-            document.body.appendChild(balloon);
-            
-            // Remove balloon after animation ends
-            setTimeout(() => {
-                balloon.remove();
-            }, 3000);  // Slightly shorter to match the new animation
-        }
-    </script>
+    }
+</script>
+
 </body>
 </html>
