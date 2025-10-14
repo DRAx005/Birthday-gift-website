@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love!</title>
+    <style>
+        /* Basic styling for the page */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff0f5; /* Light pink for a festive background */
+            color: #333;
+            text-align: center;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* To handle animations properly */
+        }
+
+        h1 {
+            color: #ff4500; /* OrangeRed for a birthday pop */
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        /* Styling for the clickable cake */
+        #cake {
+            font-size: 5em; /* Make the cake emoji large */
+            cursor: pointer; /* Indicate it's clickable */
+            transition: transform 0.3s; /* Smooth scale effect on hover */
+            margin-bottom: 20px;
+        }
+
+        #cake:hover {
+            transform: scale(1.1); /* Slightly enlarge on hover for interactivity */
+        }
+
+        .hidden-message {
+            display: none; /* Hidden by default */
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border: 2px dashed #ff4500; /* Dashed border for a fun, gift-like feel */
+            border-radius: 10px;
+            font-size: 1.1em;
+            animation: fadeIn 1s; /* Animation for reveal */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Balloon animation for flying from the side */
+        .balloon {
+            position: absolute;
+            top: 50%; /* Start from the middle vertically */
+            font-size: 24px;
+            color: #ff4500; /* OrangeRed to match theme */
+            animation: flyAcross 3s linear; /* Fly across the screen */
+        }
+
+        @keyframes flyAcross {
+            from {
+                transform: translateX(-100vw); /* Start from the left outside the screen */
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100vw); /* End at the right outside the screen */
+                opacity: 0; /* Fade out at the end */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy Birthday, My Love! 🎉</h1>
+    <p>Hey, Megha Gupta, I have created this special page just for your birthday. Do not Click the cake below!</p>
+    
+    <div id="cake">🎂</div>  <!-- Clickable cake element -->
+    
+    <div id="message" class="hidden-message">
+        <p>Happy Birthday, Megha Gupta! I hope this year is filled with all the joy, love, and adventures you deserve. You're the best thing that's ever happened to me, and I'm so grateful for you. Let's make this birthday unforgettable! 🎂❤️</p>
+        <p>With all my love, Nijum Dutta Your BCA boyfriend :P with a website! </p>
+    </div>
+    
+    <script>
+        // JavaScript for interactivity
+        document.getElementById('cake').addEventListener('click', function() {
+            var messageDiv = document.getElementById('message');
+            messageDiv.style.display = 'block';  // Show the hidden message
+            
+            // Add balloon animations for a festive touch
+            for (let i = 0; i < 10; i++) {  // Create 10 balloons
+                createBalloon();
+            }
+        });
+        
+        function createBalloon() {
+            const balloon = document.createElement('div');
+            balloon.innerHTML = '🎈';
+            balloon.className = 'balloon';
+            balloon.style.top = Math.random() * 100 + 'vh';  // Random vertical position
+            balloon.style.animationDuration = Math.random() * 2 + 2 + 's';  // Random speed
+            document.body.appendChild(balloon);
+            
+            // Remove balloon after animation ends
+            setTimeout(() => {
+                balloon.remove();
+            }, 3000);  // Slightly shorter to match the new animation
+        }
+    </script>
+</body>
+</html>
